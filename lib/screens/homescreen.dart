@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:startupeducation/mentorcontainer.dart';
+import 'package:startupeducation/screens/profile.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -32,10 +35,33 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-              'assets/images/avatar.gif',
-              height: 50,
-            ), // Your right image
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: const Duration(
+                        milliseconds: 650), // Adjust the duration as needed
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return SlideTransition(
+                        position: Tween<Offset>(
+                          begin: const Offset(1.0, 0.0),
+                          end: Offset.zero,
+                        ).animate(animation),
+                        child: child,
+                      );
+                    },
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        const ProfileScreen(),
+                  ),
+                );
+              },
+              child: Image.asset(
+                'assets/images/avatar.gif',
+                height: 50,
+              ),
+            ),
           ),
         ],
       ),
@@ -237,22 +263,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 410,
                   decoration: ShapeDecoration(
                     gradient: const LinearGradient(
-                      begin: Alignment(0.07, -1.00),
-                      end: Alignment(-0.07, 1),
-                      colors: [Color(0xFFFFAC70), Color(0xFFFF844F)],
+                      begin: Alignment(0.00, 1.00),
+                      end: Alignment(0, -1),
+                      colors: [Color(0xFF02AAB0), Color(0xFF00CDAC)],
                     ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                     shadows: const [
                       BoxShadow(
-                        color: Color(0x4CFF7171),
+                        color: Color(0x3300CBAC),
                         blurRadius: 20,
                         offset: Offset(0, 12),
                         spreadRadius: 0,
                       ),
                       BoxShadow(
-                        color: Color(0x4CFF9F69),
+                        color: Color(0x3300CCAC),
                         blurRadius: 16,
                         offset: Offset(0, 8),
                         spreadRadius: 0,
@@ -328,76 +354,177 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          const SizedBox(height: 24,),
-          Row(
-            children: [
-              const SizedBox(
-                width: 18,
-              ),
-              Container(
-                width: 261,
-                height: 72,
-                decoration: ShapeDecoration(
-                  gradient: const LinearGradient(
-                    begin: Alignment(-0.50, 0.86),
-                    end: Alignment(0.5, -0.86),
-                    colors: [
-                      Color(0xFF0052D4),
-                      Color(0xFF4364F7),
-                      Color(0xFF6FB1FC)
+          const SizedBox(
+            height: 24,
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                const SizedBox(
+                  width: 18,
+                ),
+                Container(
+                  width: 261,
+                  height: 72,
+                  decoration: ShapeDecoration(
+                    gradient: const LinearGradient(
+                      begin: Alignment(-0.50, 0.86),
+                      end: Alignment(0.5, -0.86),
+                      colors: [
+                        Color(0xFF0052D4),
+                        Color(0xFF4364F7),
+                        Color(0xFF6FB1FC)
+                      ],
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    shadows: const [
+                      BoxShadow(
+                        color: Color(0x33001A6F),
+                        blurRadius: 16,
+                        offset: Offset(4, 8),
+                        spreadRadius: 0,
+                      )
                     ],
                   ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                  child: Row(
+                    children: [
+                      const SizedBox(
+                        width: 14,
+                      ),
+                      Container(
+                        width: 44,
+                        height: 44,
+                        decoration: const ShapeDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/ellipse_3.png'),
+                            fit: BoxFit.fill,
+                          ),
+                          shape: OvalBorder(),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 11,
+                          ),
+                          Text(
+                            'Ankur Warikoo',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w700,
+                              height: 0,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            'Founder Nearby | Mentor',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w400,
+                              height: 0,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
                   ),
-                  shadows: const [
-                    BoxShadow(
-                      color: Color(0x33001A6F),
-                      blurRadius: 16,
-                      offset: Offset(4, 8),
-                      spreadRadius: 0,
-                    )
-                  ],
                 ),
-                child: Row(
-                  children: [
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Image.asset('assets/images/ellipse_3.png',height: 90,),
-                    
-                    const Column(
-                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 14,
-                        ),
-                        Text(
-                          'Ankur Warikoo',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w700,
-                            height: 0,
-                          ),
-                        ),
-                        Text(
-                          'Founder Nearby | Mentor',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w400,
-                            height: 0,
-                          ),
-                        ),
+                const SizedBox(
+                  width: 25,
+                ),
+                Container(
+                  width: 261,
+                  height: 72,
+                  decoration: ShapeDecoration(
+                    gradient: const LinearGradient(
+                      begin: Alignment(-0.50, 0.86),
+                      end: Alignment(0.5, -0.86),
+                      colors: [
+                        Colors.black,
+                        Color(0xFF2D2C2C),
+                        Color(0xFF626262)
                       ],
-                    )
-                  ],
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    shadows: const [
+                      BoxShadow(
+                        color: Color(0x33353535),
+                        blurRadius: 16,
+                        offset: Offset(4, 8),
+                        spreadRadius: 0,
+                      )
+                    ],
+                  ),
+                  child: Row(
+                    children: [
+                      const SizedBox(
+                        width: 14,
+                      ),
+                      Container(
+                        width: 44,
+                        height: 44,
+                        decoration: const ShapeDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/ellipse_2.png'),
+                            fit: BoxFit.fill,
+                          ),
+                          shape: OvalBorder(),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 11,
+                          ),
+                          Text(
+                            'Kunal Shah',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w700,
+                              height: 0,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            'Founder CRED',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w400,
+                              height: 0,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           )
         ],
       ),
