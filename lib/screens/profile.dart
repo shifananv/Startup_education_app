@@ -34,7 +34,32 @@ class ProfileScreen extends StatelessWidget {
                   left: 25,
                   child: GestureDetector(
                     onTap: () {
-                       Navigator.of(context).push(createRoute());
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          transitionDuration: const Duration(
+                              milliseconds:
+                                  400), // Adjust the duration as needed
+                          transitionsBuilder:
+                              (context, animation, secondaryAnimation, child) {
+                            return SlideTransition(
+                              position: Tween<Offset>(
+                                begin: const Offset(
+                                    -1.0, 0.0), // Change begin to -1.0
+                                end: Offset.zero,
+                              ).animate(animation),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(
+                                    20), // Adjust the radius as needed
+                                child: child,
+                              ),
+                            );
+                          },
+                          pageBuilder:
+                              (context, animation, secondaryAnimation) =>
+                                  const HomeScreen(),
+                        ),
+                      );
                     },
                     child: const Icon(
                       Icons.arrow_back,
@@ -117,7 +142,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: 137,
+                      width: 120,
                     ),
                     Text(
                       'View All',
@@ -334,10 +359,15 @@ class ProfileScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(width: 25,)
+                  const SizedBox(
+                    width: 25,
+                  )
                 ],
               ),
-            )
+            ),
+            const SizedBox(
+              height: 15,
+            ),
           ],
         ),
       ),
